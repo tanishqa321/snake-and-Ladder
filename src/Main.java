@@ -9,23 +9,44 @@ public class Main {
         // to see how IntelliJ IDEA suggests fixing it.
         System.out.println("Welcome to Snake & Ladder Game");
         int numberOfDiceRolls=0;
-        int playerPosition = 0;
+        int player1Position = 0;
+        int player2Position = 0;
+        int currentPlayer = 1;
         Random random = new Random();
-        while (playerPosition < WINNING_POSITION) {
+        while (player1Position < WINNING_POSITION && player2Position < WINNING_POSITION) {
 
             int dice = random.nextInt(6) + 1; // Roll the dice (1 to 6)
             int option = random.nextInt(3);
-            int position = playerPosition;
-            numberOfDiceRolls+=1;
-            playerPosition = SnakeAndLadder.updatePosition(position, dice, option);
-            if (playerPosition < 0) playerPosition = 0;
-            //UC5
-            if (playerPosition > WINNING_POSITION) {
-                playerPosition -= dice;
-            }
-            System.out.println("position after " +numberOfDiceRolls+" number of rolls is :"+ playerPosition);
-        }
-        System.out.println("Number of times Dice was rolled :" + numberOfDiceRolls);
 
+            numberOfDiceRolls+=1;
+            if (currentPlayer == 1) {
+                System.out.println("Player 1 rolls dice: " + dice);
+                player1Position = SnakeAndLadder.updatePosition(player1Position, dice, option);
+                System.out.println("Player 1 is now at position: " + player1Position);
+                if (option == 1 && player1Position < WINNING_POSITION) {
+                    System.out.println("Player 1 got a Ladder! Rolling again.");
+                    continue; // Player 1 gets another chance
+                }
+                currentPlayer = 2; // Switch to Player 2
+            } else {
+                System.out.println("Player 2 rolls dice: " + dice);
+                player2Position = SnakeAndLadder.updatePosition(player2Position, dice, option);
+                System.out.println("Player 2 is now at position: " + player2Position);
+                if (option == 1 && player2Position < WINNING_POSITION) {
+                    System.out.println("Player 2 got a Ladder! Rolling again.");
+                    continue; // Player 2 gets another chance
+                }
+                currentPlayer = 1; // Switch to Player 1
+            }
+        }
+
+        System.out.println("Game Over!");
+        if (player1Position == WINNING_POSITION) {
+            System.out.println("Player 1 wins the game!");
+        } else {
+            System.out.println("Player 2 wins the game!");
+        }
+
+        System.out.println("Total dice rolls: " + numberOfDiceRolls);
     }
 }
