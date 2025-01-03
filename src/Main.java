@@ -8,21 +8,24 @@ public class Main {
         //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
         // to see how IntelliJ IDEA suggests fixing it.
         System.out.println("Welcome to Snake & Ladder Game");
-
+        int numberOfDiceRolls=0;
         int playerPosition = 0;
         Random random = new Random();
         while (playerPosition < WINNING_POSITION) {
+
             int dice = random.nextInt(6) + 1; // Roll the dice (1 to 6)
             int option = random.nextInt(3);
             int position = playerPosition;
+            numberOfDiceRolls+=1;
             playerPosition = SnakeAndLadder.updatePosition(position, dice, option);
             if (playerPosition < 0) playerPosition = 0;
             //UC5
             if (playerPosition > WINNING_POSITION) {
                 playerPosition -= dice;
             }
-            System.out.println(playerPosition);
+            System.out.println("position after " +numberOfDiceRolls+" number of rolls is :"+ playerPosition);
         }
+        System.out.println("Number of times Dice was rolled :" + numberOfDiceRolls);
 
     }
 }
