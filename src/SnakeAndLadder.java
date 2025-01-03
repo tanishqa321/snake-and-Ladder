@@ -9,6 +9,7 @@ public class SnakeAndLadder {
                 break;
             case 2: // Snake
                 position -= dice;
+
                 break;
         }
 
