@@ -1,3 +1,5 @@
+import java.util.Random;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
@@ -7,6 +9,10 @@ public class Main {
         System.out.println("Welcome to Snake & Ladder Game");
         int playerPosition = 0;
         Random random = new Random();
+        int dice = random.nextInt(6) + 1; // Roll the dice (1 to 6)
+        int option = random.nextInt(3);
+        int position =0;
+        System.out.println(SnakeAndLadder.updatePosition(position,dice,option));
 
     }
 }
